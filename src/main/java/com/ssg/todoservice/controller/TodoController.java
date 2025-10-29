@@ -80,7 +80,7 @@ public class TodoController {
 
         if (bindingResult.hasErrors()) {
             log.info("POST todo modify has error....");
-            redirectAttributes.addAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addAttribute("tno", todoDTO.getTno());
             return "redirect:/todo/modify";
         }
