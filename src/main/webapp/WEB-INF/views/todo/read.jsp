@@ -88,6 +88,16 @@
                             <button type="button" class="btn btn-primary">Modify</button>
                             <button type="button" class="btn btn-secondary">List</button>
                         </div>
+                        <%--  수정/삭제용 링크 처리  --%>
+                        <script>
+                            document.querySelector(".btn-primary").addEventListener("click", function(e){
+                                self.location = "/todo/modify?tno="+${dto.tno}
+                            },false)
+                            document.querySelector(".btn-secondary").addEventListener("click", function(e){
+                                self.location = "/todo/list";
+                            },false)
+                        </script>
+
                     </div>
                 </div>
             </div>
