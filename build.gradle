@@ -33,11 +33,6 @@ dependencies {
     implementation 'org.springframework:spring-jdbc:5.3.27'
     implementation 'org.springframework:spring-tx:5.3.27'
 
-    // MySQL DB 드라이버
-    implementation 'mysql:mysql-connector-java:8.0.22'
-    // DB 커넥션풀 라이브러리
-    implementation 'com.zaxxer:HikariCP:5.0.1'
-
     // lombok 라이브러리 -> getter, setter 편리하게 사용
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
@@ -52,19 +47,25 @@ dependencies {
     // JSP 파일 내부에서 JSTL 문법을 적용
     implementation 'jstl:jstl:1.2'
 
-    // model 계층 객체 변환용 mapper 추가
-    implementation 'org.modelmapper:modelmapper:3.0.0'
+    // MySQL DB 드라이버
+    implementation 'mysql:mysql-connector-java:8.0.22'
+    // DB 커넥션풀 라이브러리
+    implementation 'com.zaxxer:HikariCP:5.0.1'
 
     // mybatis 라이브러리 추가
     // tx, jdbc, mybatis, mybatis-spring의 4가지 모듈이 모두 있어야 mybatis 사용 가능
     implementation 'org.mybatis:mybatis:3.5.7'
     implementation 'org.mybatis:mybatis-spring:2.0.6'
 
+    // model 계층 객체 변환용 mapper 추가
+    implementation 'org.modelmapper:modelmapper:3.0.0'
+    // 유효성 검사 라이브러리
+    implementation 'org.hibernate.validator:hibernate-validator:6.2.5.Final'
+
     //  MyBatis 사용 편의성을 제공하는 추가 라이브러리
     implementation 'org.mybatis:mybatis-typehandlers-jsr310:1.0.2'
-    implementation 'org.hibernate.validator:hibernate-validator:6.2.5.Final'
-    implementation 'javax.el:javax.el-api:3.0.0'
-    implementation 'org.glassfish.web:javax.el:2.2.6'
+//    implementation 'javax.el:javax.el-api:3.0.0'
+//    implementation 'org.glassfish.web:javax.el:2.2.6'
 
     // 테스트를 수행할 때 필요한 기능을 제공하는 라이브러리
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
