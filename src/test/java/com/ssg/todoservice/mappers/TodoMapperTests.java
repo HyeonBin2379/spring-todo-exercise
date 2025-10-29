@@ -50,4 +50,22 @@ public class TodoMapperTests {
         log.info(todoVO);
         Assertions.assertNotNull(todoVO);
     }
+
+    @Test
+    public void testDelete() {
+        Long tno = 1L;
+        todoMapper.delete(tno);
+    }
+
+    @Test
+    public void testUpdate() {
+        Long tno = 1L;
+        TodoVO todoVO = TodoVO.builder()
+                .tno(tno)
+                .title("게시글 입력 테스트입니다.")
+                .dueDate(LocalDate.parse("2026-01-01"))
+                .writer("tester00")
+                .build();
+        todoMapper.update(todoVO);
+    }
 }

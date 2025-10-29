@@ -21,4 +21,12 @@
     <insert id="insert">
         insert into todo(title, dueDate, writer) values (#{title}, #{dueDate}, #{writer})
     </insert>
+
+    <delete id="delete">
+        delete from todo where tno = #{tno}
+    </delete>
+
+    <update id="update" >
+        update todo set title = #{title}, dueDate = #{dueDate}, finished = #{finished} where tno = #{tno}
+    </update>
 </mapper>

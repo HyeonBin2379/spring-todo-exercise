@@ -32,6 +32,7 @@
             <set>
                 <!--  날짜 변환을 수행할 Formatter를 스프링 빈으로 등록  -->
                 <bean class="com.ssg.todoservice.controller.formatter.LocalDateFormatter"/>
+                <bean class="com.ssg.todoservice.controller.formatter.CheckboxFormatter"/>
             </set>
         </property>
     </bean>

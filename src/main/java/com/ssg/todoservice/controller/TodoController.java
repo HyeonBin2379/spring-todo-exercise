@@ -51,13 +51,42 @@ public class TodoController {
 
         // 등록 성공
         log.info(todoDTO);
+        todoService.register(todoDTO);
         return "redirect:/todo/list";
     }
 
-    @GetMapping("/read")
+    //    조회, 수정 화면은 동일
+    @GetMapping({"/read", "/modify"})
     public void read(Long tno, Model model) {
+        log.info("GET todo detail....");
         TodoDTO todoDTO = todoService.getOne(tno);
         log.info(todoDTO);
         model.addAttribute("dto", todoDTO);
+    }
+
+    @PostMapping("/remove")
+    public String remove(Long tno, RedirectAttributes redirectAttributes) {
+        log.info("POST todo remove....");
+        log.info("tno: {}", tno);
+        todoService.remove(tno);
+        return "redirect:/todo/list";
+    }
+
+    @PostMapping("/modify")
+    public String modify(@Valid TodoDTO todoDTO,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
+        log.info("POST todo modify");
+
+        if (bindingResult.hasErrors()) {
+            log.info("POST todo modify has error....");
+            redirectAttributes.addAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addAttribute("tno", todoDTO.getTno());
+            return "redirect:/todo/modify";
+        }
+
+        log.info(todoDTO);
+        todoService.modify(todoDTO);
+        return "redirect:/todo/list";
     }
 }
