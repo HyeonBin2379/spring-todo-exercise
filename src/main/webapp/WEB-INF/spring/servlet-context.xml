@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- InternalResourceViewResolver: DispatcherServlet이 반환할 뷰에 해당하는 경로를 탐색 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- InternalResourceViewResolver는 경로명이 /WEB-INF/views/로 시작하고 .jsp로 끝나는 뷰를 바인딩 -->
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--  controller 패키지 내부의 컨트롤러 클래스들을 모두 조회하여 빈으로 등록  -->
+    <context:component-scan base-package="com.ssg.todoservice.controller"/>
+
+<!--    &lt;!&ndash;  Spring 웹 MVC에서 어노테이션 활성화  &ndash;&gt;-->
+<!--    <mvc:annotation-driven conversion-service="conversionService"/>-->
+<!--    &lt;!&ndash;  resources 폴더의 하위 파일들을 모두 매핑 대상으로 지정 &ndash;&gt;-->
+<!--    <mvc:resources mapping="/resources/**" location="classpath:/static/"/>-->
+
+<!--    &lt;!&ndash;  Spring 웹 MVC에서 지정한 Formatter를 활용하여 파라미터 형변환을 수행   &ndash;&gt;-->
+<!--    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
+<!--        <property name="formatters">-->
+<!--            <set>-->
+<!--                &lt;!&ndash;  날짜 변환을 수행할 Formatter를 스프링 빈으로 등록  &ndash;&gt;-->
+<!--                <bean class="com.ssg.todoservice.controller.formatter.LocalDateFormatter"/>-->
+<!--            </set>-->
+<!--        </property>-->
+<!--    </bean>-->
+</beans>

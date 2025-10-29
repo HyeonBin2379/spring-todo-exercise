@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!--  WAS 구동 시 생성할 ApplicationContext 객체에 적용할 설정을 지정 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring/root-context.xml</param-value>
+    </context-param>
+
+    <!--  리스너: WAS 서버가 구동될 때 특정 작업을 수행 -->
+    <!--  ContextLoaderListener: 스프링 ApplicationContext를 생성 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+    <servlet>
+        <!-- DispatcherServlet을 스프링 빈으로 등록: 서블릿의 처리 결과를 받아 뷰를 반환할 Front-Controller-->
+        <servlet-name>appServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+        <!--  초기 세팅 지정1: ApplicationContext에 설정 적용  -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>WEB-INF/spring/servlet-context.xml</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <!--  root url로부터 오는 요청을 appServlet이 처리 -->
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>
