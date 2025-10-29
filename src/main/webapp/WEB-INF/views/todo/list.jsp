@@ -83,6 +83,19 @@
                 </div>
             </div>
         </div>
+        <div class="my-4">
+            <div class="float-end">
+                <button type="button" class="btn btn-primary">Register</button>
+            </div>
+        </div>
+        <script>
+            document.querySelector(".btn-primary").addEventListener("click",function(e) {
+                e.preventDefault()
+                e.stopPropagation()
+
+                self.location = "/todo/register"
+            },false);
+        </script>
         <div class="row footer">
             <div class="row fixed-bottom" style="z-index: -100">
                 <footer class="py-1 my-1 ">
