@@ -1,7 +1,14 @@
 package com.ssg.todoservice.dto;
 
+import lombok.*;
+
 import java.time.LocalDate;
 
+@ToString
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TodoDTO {
 
     private Long tno;
