@@ -44,7 +44,7 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!--  발생한 모든 요청에 대해 UTF-8 인코딩 적용  -->
+    <!--  발생한 모든 요청에 대해 UTF-8 인코딩 적용(한글 깨짐 방지)  -->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

@@ -10,4 +10,7 @@
         select now()
     </select>
 
+    <insert id="insert">
+        insert into todo(title, dueDate, writer) values (#{title}, #{dueDate}, #{writer})
+    </insert>
 </mapper>

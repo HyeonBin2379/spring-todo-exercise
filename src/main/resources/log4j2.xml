@@ -7,8 +7,16 @@
 
     </Appenders>
     <Loggers>
+        <Logger name="org.springframework" level="INFO" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+
+        <Logger name="com.ssg" level="INFO" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+
         <!--  mapper loglevel = trace -->
-        <Logger name="com.ssg.todoservice.mapper" level="TRACE">
+        <Logger name="com.ssg.todoservice.mapper" level="TRACE" additivity="false">
             <AppenderRef ref="CONSOLE"/>
         </Logger>
 
