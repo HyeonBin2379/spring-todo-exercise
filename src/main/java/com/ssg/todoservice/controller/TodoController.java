@@ -22,12 +22,14 @@ public class TodoController {
 
     private final TodoService todoService;
 
+    // 리스트 조회
     @GetMapping("/list")
     public void list(Model model) {
         log.info("todo list....");
         model.addAttribute("dtoList", todoService.getAll());
     }
 
+    // todo 등록 + PRG 패턴
     @GetMapping("/register")
     public void registerGET() {
         log.info("GET todo register....");
@@ -50,5 +52,12 @@ public class TodoController {
         // 등록 성공
         log.info(todoDTO);
         return "redirect:/todo/list";
+    }
+
+    @GetMapping("/read")
+    public void read(Long tno, Model model) {
+        TodoDTO todoDTO = todoService.getOne(tno);
+        log.info(todoDTO);
+        model.addAttribute("dto", todoDTO);
     }
 }

@@ -36,4 +36,10 @@ public class TodoServiceImpl implements TodoService {
                 .sorted(Comparator.comparing(TodoDTO::getTno).reversed())
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public TodoDTO getOne(Long tno) {
+        TodoVO todoVO = todoMapper.selectOne(tno);
+        return modelMapper.map(todoVO, TodoDTO.class);
+    }
 }
