@@ -10,6 +10,10 @@
         select now()
     </select>
 
+    <select id="selectAll" resultType="com.ssg.todoservice.domain.TodoVO">
+        select * from todo
+    </select>
+
     <insert id="insert">
         insert into todo(title, dueDate, writer) values (#{title}, #{dueDate}, #{writer})
     </insert>
