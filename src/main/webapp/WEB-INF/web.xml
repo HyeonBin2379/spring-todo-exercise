@@ -16,7 +16,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-
+    <!--  스프링 웹 컨테이너에 등록할 서블릿을 지정  -->
     <servlet>
         <!-- DispatcherServlet을 스프링 빈으로 등록: 서블릿의 처리 결과를 받아 뷰를 반환할 Front-Controller-->
         <servlet-name>appServlet</servlet-name>
@@ -34,18 +34,19 @@
             <param-value>true</param-value>
         </init-param>
 
-        <!--  초기 작업 수행 시 실행 우선순위   -->
+        <!--  웹 애플리케이션 구동 시 서블릿 등록 우선순위 지정 -->
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <!--  appServlet에서 처리할 요청을 지정: Root 경로에 해당하는 요청을 처리 -> 초기 실행 화면 출력 -->
     <servlet-mapping>
-        <!--  root url로부터 오는 요청을 appServlet이 처리 -->
         <servlet-name>appServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!--  발생한 모든 요청에 대해 UTF-8 인코딩 적용(한글 깨짐 방지)  -->
+    <!--  UTF-8 인코딩 적용(한글 깨짐 방지) 필터  -->
     <filter>
+        <!--  사용할 필터, 인코딩 타입, 인코딩 적용 방식 지정 -->
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <init-param>
@@ -58,6 +59,7 @@
         </init-param>
     </filter>
 
+    <!--  한글 깨짐 방지 필터를 적용할 범위 지정 -> 모든 요청에 대해 적용  -->
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
