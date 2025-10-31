@@ -1,6 +1,7 @@
 package com.ssg.todoservice.mappers;
 
 import com.ssg.todoservice.domain.TodoVO;
+import com.ssg.todoservice.dto.PageRequestDTO;
 import com.ssg.todoservice.mapper.TodoMapper;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
@@ -67,5 +68,15 @@ public class TodoMapperTests {
                 .writer("tester00")
                 .build();
         todoMapper.update(todoVO);
+    }
+
+    @Test
+    public void testSelectAll() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(2)
+                .size(10)
+                .build();
+        List<TodoVO> todoVOList = todoMapper.selectList(pageRequestDTO);
+        todoVOList.forEach(log::info);
     }
 }
