@@ -23,26 +23,36 @@ public class PageRequestDTO {
 
     // 한 페이지에 담길 글의 개수   
     @Builder.Default
-    @Min(value = 1)
+    @Min(value = 10)
     @Max(value = 100)
     @Positive
     private int size = 10;
-    
+
+    // 리스트 페이지 유지용 링크 쿼리
     private String link;
+
+    // 검색 타입들: "t"(title), "w"(writer)
     private String[] types;
+
+    // 검색어
     private String keyword;
+
+    // 완료 여부 필터
     private boolean finished;
-    
+
+    // 기간 검색
     private LocalDate from;
     private LocalDate to;
-    
+
+    // limit offset
     public int getSkip() {
         return (page-1)*10;
     }
 
     public String getLink() {
-        return this.link = (this.link == null)
-                ? String.format("page=%d&size=%d", page, size)
-                : this.link;
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("page=%d&size=%d", page, size));
+
+        return builder.toString();
     }
 }

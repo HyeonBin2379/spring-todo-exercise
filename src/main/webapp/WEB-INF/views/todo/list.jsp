@@ -48,6 +48,38 @@
                 </div>
             </nav>
         </div>
+
+        <div class="row content">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Search </h5>
+                        <form action="/todo/list" method="get">
+<%--                            <input type="hidden" name="size" value="${pageRequestDTO.size}">--%>
+<%--                            <div class="mb-3">--%>
+<%--                                <input type="checkbox" name="finished" ${pageRequestDTO.finished?"checked":""} >완료여부--%>
+<%--                            </div>--%>
+<%--                            <div class="mb-3">--%>
+<%--                                <input type="checkbox" name="types" value="t" ${pageRequestDTO.checkType("t")?"checked":""}>제목--%>
+<%--                                <input type="checkbox" name="types" value="w"  ${pageRequestDTO.checkType("w")?"checked":""}>작성자--%>
+<%--                                <input type="text"  name="keyword" class="form-control" value ='<c:out value="${pageRequestDTO.keyword}"/>' >--%>
+<%--                            </div>--%>
+<%--                            <div class="input-group mb-3 dueDateDiv">--%>
+<%--                                <input type="date" name="from" class="form-control" value="${pageRequestDTO.from}">--%>
+<%--                                <input type="date" name="to" class="form-control"  value="${pageRequestDTO.to}">--%>
+<%--                            </div>--%>
+<%--                            <div class="input-group mb-3">--%>
+<%--                                <div class="float-end">--%>
+<%--                                    <button class="btn btn-primary" type="submit">Search</button>--%>
+<%--                                    <button class="btn btn-info clearBtn" type="reset">Clear</button>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row content">
             <!--  열 방향 채움  -->
             <div class="col">
@@ -72,8 +104,8 @@
                             <c:forEach var="dto" items="${responseDTO.dtoList}" varStatus="status">
                                 <tr>
                                     <%--  tno 대신 전체 게시글 개수를 기준으로 게시글 번호를 출력  --%>
-                                    <th scope="row"><c:out value="${status.count}"/></th>
-                                    <td><a href="/todo/read?tno=${dto.tno}&${requestDTO.getLink()}"><c:out value="${dto.title}"/></a></td>
+                                    <th scope="row"><c:out value="${dto.tno}"/></th>
+                                    <td><a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}"><c:out value="${dto.title}"/></a></td>
                                     <td><c:out value="${dto.writer}"/></td>
                                     <td><c:out value="${dto.dueDate}"/></td>
                                     <td><c:out value="${dto.finished}"/></td>
@@ -86,17 +118,17 @@
                                 <%--  페이지 번호 리스트 출력  --%>
                                 <c:if test="${responseDTO.prev}">
                                     <li class="page-item">
-                                        <a class="page-link" href="${responseDTO.start-1}" tabindex="-1">Previous</a>
+                                        <a class="page-link" data-num="${responseDTO.start-1}" >Previous</a>
                                     </li>
                                 </c:if>
                                 <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
                                     <li class="page-item ${responseDTO.page == num ? "activate" : ""}">
-                                        <a class="page-link" href="${num}">${num}</a>
+                                        <a class="page-link" data-num="${num}">${num}</a>
                                     </li>
                                 </c:forEach>
                                 <c:if test="${responseDTO.next}">
                                     <li class="page-item">
-                                        <a class="page-link" href="${responseDTO.end+1}">Next</a>
+                                        <a class="page-link" data-num="${responseDTO.end+1}">Next</a>
                                     </li>
                                 </c:if>
                             </ul>
@@ -145,15 +177,15 @@
             e.stopPropagation()
 
             const target = e.target
-            console.log(target)
 
             if (target.tagName !== 'A') {
                 return
             }
-            const targetPage = target.getAttribute("href")
-            console.log(targetPage)
+            const num = target.getAttribute("data-num")
+            const formObj = document.querySelector("form")
 
-            self.location = `/todo/list?page=\${targetPage}`
+            formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'>`
+            formObj.submit()
         }, false);
     </script>
     </body>
