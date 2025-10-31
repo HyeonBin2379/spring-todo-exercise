@@ -22,7 +22,7 @@
         <servlet-name>appServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 
-        <!--  초기 세팅 지정1: ApplicationContext에 설정 적용  -->
+        <!--  초기 세팅 지정1: DispatcherServlet에 적용할 컨트롤러 관련 설정을 지정  -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>WEB-INF/spring/servlet-context.xml</param-value>
