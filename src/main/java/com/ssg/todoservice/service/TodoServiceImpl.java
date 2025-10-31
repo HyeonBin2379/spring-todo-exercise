@@ -2,6 +2,7 @@ package com.ssg.todoservice.service;
 
 import com.ssg.todoservice.domain.TodoVO;
 import com.ssg.todoservice.dto.PageRequestDTO;
+import com.ssg.todoservice.dto.PageResponseDTO;
 import com.ssg.todoservice.dto.TodoDTO;
 import com.ssg.todoservice.mapper.TodoMapper;
 import lombok.RequiredArgsConstructor;
@@ -53,5 +54,21 @@ public class TodoServiceImpl implements TodoService {
     public void modify(TodoDTO todoDTO) {
         TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class);
         todoMapper.update(todoVO);
+    }
+
+    @Override
+    public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
+        List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+        List<TodoDTO> dtoList = voList.stream()
+                .map(todoVO -> modelMapper.map(todoVO, TodoDTO.class))
+                .sorted(Comparator.comparing(TodoDTO::getTno).reversed())
+                .collect(Collectors.toList());
+        int totalRowCount = todoMapper.getCount(pageRequestDTO);
+
+        return PageResponseDTO.<TodoDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalRowCount)
+                .build();
     }
 }

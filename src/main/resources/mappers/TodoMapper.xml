@@ -27,7 +27,7 @@
         select * from todo where tno = #{tno}
     </select>
 
-    <select id="getCount">
+    <select id="getCount" resultType="int">
         <!-- null인 값이 포함되는 것을 방지하기 위해 tno 속성값을 갖는 테이블 행의 개수 카운팅 진행 -->
         select count(tno) from todo
     </select>

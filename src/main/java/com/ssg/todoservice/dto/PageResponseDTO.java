@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 // 제네릭 타입 사용: 확장성을 높이기 위해 사용 - 회원, 입고, 출고 게시판 등에서 모두 페이지네이션 적용 가능
@@ -17,6 +18,7 @@ public class PageResponseDTO<E> {
     private int total;
 
     //시작 페이지 번호
+    @Min(value = 1)
     private int start;
     //끝 페이지 번호
     private int end;

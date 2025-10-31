@@ -14,5 +14,5 @@ public interface TodoMapper {
     TodoVO selectOne(Long tno);
     void delete(Long tno);
     void update(TodoVO todoVO);
-    int getCount();
+    int getCount(PageRequestDTO pageRequestDTO);
 }

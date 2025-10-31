@@ -1,5 +1,7 @@
 package com.ssg.todoservice.controller;
 
+import com.ssg.todoservice.dto.PageRequestDTO;
+import com.ssg.todoservice.dto.PageResponseDTO;
 import com.ssg.todoservice.dto.TodoDTO;
 import com.ssg.todoservice.service.TodoService;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +25,23 @@ public class TodoController {
     private final TodoService todoService;
 
     // 리스트 조회
+//    @GetMapping("/list")
+//    public void list(Model model) {
+//        log.info("todo list....");
+//        model.addAttribute("dtoList", todoService.getAll());
+//    }
+
     @GetMapping("/list")
-    public void list(Model model) {
-        log.info("todo list....");
-        model.addAttribute("dtoList", todoService.getAll());
+    public void list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
+        log.info("PageRequestDTO:" + pageRequestDTO);
+
+        if (bindingResult.hasErrors()) {
+            pageRequestDTO = PageRequestDTO.builder().build();
+        }
+
+        model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));
     }
+
 
     // todo 등록 + PRG 패턴
     @GetMapping("/register")
