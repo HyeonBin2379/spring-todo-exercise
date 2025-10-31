@@ -71,11 +71,12 @@ public class TodoController {
 
     //    조회, 수정 화면은 동일
     @GetMapping({"/read", "/modify"})
-    public void read(Long tno, Model model) {
+    public void read(PageRequestDTO pageRequestDTO, Long tno, Model model) {
         log.info("GET todo detail....");
         TodoDTO todoDTO = todoService.getOne(tno);
         log.info(todoDTO);
         model.addAttribute("dto", todoDTO);
+        model.addAttribute("requestDTO", pageRequestDTO);
     }
 
     @PostMapping("/remove")

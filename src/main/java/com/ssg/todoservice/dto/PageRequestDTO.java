@@ -39,5 +39,10 @@ public class PageRequestDTO {
     public int getSkip() {
         return (page-1)*10;
     }
-    
+
+    public String getLink() {
+        return this.link = (this.link == null)
+                ? String.format("page=%d&size=%d", page, size)
+                : this.link;
+    }
 }

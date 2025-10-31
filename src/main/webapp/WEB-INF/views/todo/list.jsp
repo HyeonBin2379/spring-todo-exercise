@@ -57,21 +57,23 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Special title treatment</h5>
+
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">Tno</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Writer</th>
-                                <th scope="col">DueDate</th>
-                                <th scope="col">Finished</th>
+                                <th scope="col">번호</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">작성자</th>
+                                <th scope="col">마감날짜</th>
+                                <th scope="col">완료여부</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="dto" items="${dtoList}" >
+                            <c:forEach var="dto" items="${responseDTO.dtoList}" varStatus="status">
                                 <tr>
-                                    <th scope="row"><c:out value="${dto.tno}"/></th>
-                                    <td><a href="/todo/read?tno=${dto.tno}"><c:out value="${dto.title}"/></a></td>
+                                    <%--  tno 대신 전체 게시글 개수를 기준으로 게시글 번호를 출력  --%>
+                                    <th scope="row"><c:out value="${status.count}"/></th>
+                                    <td><a href="/todo/read?tno=${dto.tno}&${requestDTO.getLink()}"><c:out value="${dto.title}"/></a></td>
                                     <td><c:out value="${dto.writer}"/></td>
                                     <td><c:out value="${dto.dueDate}"/></td>
                                     <td><c:out value="${dto.finished}"/></td>
@@ -79,6 +81,26 @@
                             </c:forEach>
                             </tbody>
                         </table>
+                        <div class="float-end">
+                            <ul class="pagination flex-wrap">
+                                <%--  페이지 번호 리스트 출력  --%>
+                                <c:if test="${responseDTO.prev}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${responseDTO.start-1}" tabindex="-1">Previous</a>
+                                    </li>
+                                </c:if>
+                                <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
+                                    <li class="page-item ${responseDTO.page == num ? "activate" : ""}">
+                                        <a class="page-link" href="${num}">${num}</a>
+                                    </li>
+                                </c:forEach>
+                                <c:if test="${responseDTO.next}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${responseDTO.end+1}">Next</a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,5 +136,25 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
+
+    <script>
+        <%--  페이지의 특정 번호 클릭 시 해당 페이지로 이동  --%>
+        document.querySelector(".pagination").addEventListener("click", (e) => {
+            // 클릭 시 발생하는 기본 이벤트가 실행되지 않도록 차단
+            e.preventDefault()
+            e.stopPropagation()
+
+            const target = e.target
+            console.log(target)
+
+            if (target.tagName !== 'A') {
+                return
+            }
+            const targetPage = target.getAttribute("href")
+            console.log(targetPage)
+
+            self.location = `/todo/list?page=\${targetPage}`
+        }, false);
+    </script>
     </body>
 </html>
