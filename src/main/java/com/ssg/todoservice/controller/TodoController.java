@@ -87,7 +87,8 @@ public class TodoController {
     }
 
     @PostMapping("/modify")
-    public String modify(@Valid TodoDTO todoDTO,
+    public String modify(PageRequestDTO pageRequestDTO,
+                         @Valid TodoDTO todoDTO,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes) {
         log.info("POST todo modify");
@@ -101,6 +102,7 @@ public class TodoController {
 
         log.info(todoDTO);
         todoService.modify(todoDTO);
+        redirectAttributes.addAttribute("tno", todoDTO.getTno());
         return "redirect:/todo/read";
     }
 }

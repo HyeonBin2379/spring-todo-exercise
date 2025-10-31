@@ -122,7 +122,7 @@
                                     </li>
                                 </c:if>
                                 <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
-                                    <li class="page-item ${responseDTO.page == num ? "activate" : ""}">
+                                    <li class="page-item ${responseDTO.page == num ? "active" : ""}">
                                         <a class="page-link" data-num="${num}">${num}</a>
                                     </li>
                                 </c:forEach>

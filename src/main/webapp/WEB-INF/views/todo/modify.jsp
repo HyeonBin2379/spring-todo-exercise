@@ -118,7 +118,7 @@
                             e.preventDefault()
                             e.stopPropagation()
 
-                            formObj.action ="/todo/modify"
+                            formObj.action =`/todo/modify`
                             formObj.method ="post"
 
                             formObj.submit()
@@ -129,7 +129,7 @@
                             e.preventDefault()
                             e.stopPropagation()
 
-                            self.location= "/todo/list"
+                            self.location= "/todo/list?${postRequestDTO.link}"
                         },false);
                     </script>
 
