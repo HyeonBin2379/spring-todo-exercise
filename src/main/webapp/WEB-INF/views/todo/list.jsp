@@ -17,6 +17,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
         <title>Hello, world!</title>
+        <style>
+            .page-link {
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body>
 
@@ -108,7 +113,7 @@
                                     <td><a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}"><c:out value="${dto.title}"/></a></td>
                                     <td><c:out value="${dto.writer}"/></td>
                                     <td><c:out value="${dto.dueDate}"/></td>
-                                    <td><c:out value="${dto.finished}"/></td>
+                                    <td><c:out value="${dto.finished ? '완료' : '미완료'}"/></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -118,7 +123,7 @@
                                 <%--  페이지 번호 리스트 출력  --%>
                                 <c:if test="${responseDTO.prev}">
                                     <li class="page-item">
-                                        <a class="page-link" data-num="${responseDTO.start-1}" >Previous</a>
+                                        <a class="page-link" data-num="${responseDTO.start-1}" tabindex="-1">Previous</a>
                                     </li>
                                 </c:if>
                                 <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">

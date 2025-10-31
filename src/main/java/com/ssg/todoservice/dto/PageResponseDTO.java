@@ -49,7 +49,9 @@ public class PageResponseDTO<E> {
         this.start = this.end - 9;
 
         // 페이지 번호 리스트 출력 시, 마지막 페이지 번호값 계산
-        int last =  (int)(Math.ceil((total/(double)size)));
+        int last = (int)(Math.ceil((total/(double)size)));
+        // todo가 삭제되면서 마지막 페이지 번호에 변경이 발생했을 때, 마지막 페이지 번호를 갱신
+        this.end = Math.min(last, this.end);
 
         // 이전/이후 버튼 클릭 시 페이지 번호 리스트 변경 조건 지정
         this.prev = this.start > 1;

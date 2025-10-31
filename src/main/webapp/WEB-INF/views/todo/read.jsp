@@ -55,9 +55,6 @@
             self.location ="/todo/list?${pageRequestDTO.link}";
         },false)
 
-
-
-
     </script>
 
 </div>
