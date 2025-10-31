@@ -8,7 +8,7 @@ import javax.validation.constraints.Min;
 import java.util.List;
 
 // 제네릭 타입 사용: 확장성을 높이기 위해 사용 - 회원, 입고, 출고 게시판 등에서 모두 페이지네이션 적용 가능
-// 컨트롤러를 통해 이 DTO를 jsp 뷰로 전달하여
+// 컨트롤러를 통해 이 DTO를 jsp 뷰로 전달하여 지정한 범위의 페이지 번호 리스트 및 현재 페이지에서의 테이블 행 출력
 @Getter
 @ToString
 public class PageResponseDTO<E> {
